@@ -6,11 +6,15 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const unused = 'something';
   return (
     <>
-           <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+        Learn React and TypeScript
+      </a>
+      <p className="read-the-docs">
+      Click on the Vite and React logos to learn more
+    </p>
     </>
   )
 }
