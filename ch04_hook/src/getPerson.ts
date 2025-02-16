@@ -4,6 +4,6 @@ type Person = {
 
 export default function getPerson(): Promise<Person> {
 	return new Promise((resolve, reject) => {
-		setTimeout(() => { resolve( {name: "Bob"})}, 4000)
+		setTimeout(() => { resolve( {name: "Bob"})}, 2000)
 	})
 }
