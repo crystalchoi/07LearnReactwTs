@@ -15,13 +15,14 @@ export function Alert( {
 	heading,
 	children,
 	closable,
-	onClose, } : Props) {
+	onClose
+} : Props) {
 
 	const [visible, setVisible] = useState(false);
 
 	if (!visible) {
-		// return <div> Gone! </div>;
-		return null;
+		return <div> Gone! </div>;
+		// return null;
 	}
 
 }
