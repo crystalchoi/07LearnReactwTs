@@ -1,4 +1,4 @@
-import {useEffect, useReducer, useState} from "react";
+import {useEffect, useReducer, useRef, useState} from "react";
 import getPerson from "./getPerson.ts";
 
 type State = {
@@ -42,7 +42,8 @@ export function PersonScore() {
 	// const [score, setScore] = useState(0);
 	// const [loading, setLoading] = useState(true);
 
-const [{ name, score, loading}, dispatch] = useReducer(reducer, { name: undefined, score: 0, loading: true});
+	const [{ name, score, loading}, dispatch] = useReducer(reducer, { name: undefined, score: 0, loading: true});
+	const addButtonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(  () => {
 
@@ -55,8 +56,14 @@ const [{ name, score, loading}, dispatch] = useReducer(reducer, { name: undefine
 			// console.log(person);
 			dispatch( { type: 'initialize', name});
 			console.log("dispatch state values:", name, loading);
+			addButtonRef.current?.focus();
 		})
-	}, [])
+	}, []);
+	useEffect(() => {
+		if (!loading) {
+			addButtonRef.current?.focus();
+		}
+	}, [loading]);
 
 function handleAddScore() {
  		// setScore(prev => prev + 1);
@@ -68,10 +75,11 @@ function handleAddScore() {
 	}
 
 	return <div>
-		<h3>Name: {name},   Score: {score}</h3>
-		<button onClick={handleAddScore}> Add</button>
+		<h3>Name: {name}, Score: {score} loading: {loading}</h3>
+		<button ref={addButtonRef} onClick={handleAddScore}> Add</button>
 		<button onClick={() => dispatch({type: 'decrement'})}> Subtract</button>
 		<button onClick={() => dispatch({type: 'reset'})}> Reset</button>
+		<button onClick={() => dispatch({type: 'initialize'})}> Init</button>
 	</div>;
 
 	// return () => {};
