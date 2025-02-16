@@ -36,6 +36,10 @@ function reducer(state: State, action: Action): State {
 	}
 }
 
+function sillyExpensiveFunction() {
+	console.log('sillyExpensiveFunction');
+}
+
 export function PersonScore() {
 
 	// const [name, setName] = useState<string | null>();
@@ -65,10 +69,12 @@ export function PersonScore() {
 		}
 	}, [loading]);
 
-function handleAddScore() {
- 		// setScore(prev => prev + 1);
-	dispatch( { type: 'increment'})
-}
+	function handleAddScore() {
+			// setScore(prev => prev + 1);
+		dispatch( { type: 'increment'})
+	}
+
+	const expensiveCalculation = sillyExpensiveFunction()
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -76,10 +82,11 @@ function handleAddScore() {
 
 	return <div>
 		<h3>Name: {name}, Score: {score} loading: {loading}</h3>
+		<p> { expensiveCalculation}</p>
 		<button ref={addButtonRef} onClick={handleAddScore}> Add</button>
 		<button onClick={() => dispatch({type: 'decrement'})}> Subtract</button>
 		<button onClick={() => dispatch({type: 'reset'})}> Reset</button>
-		<button onClick={() => dispatch({type: 'initialize'})}> Init</button>
+		<button onClick={() => dispatch({type: 'initialize', name: name})}> Init</button>
 	</div>;
 
 	// return () => {};
